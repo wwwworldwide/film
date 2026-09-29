@@ -1,6 +1,8 @@
 # Film
 
-A blog of film reviews, built with [EmDash](https://github.com/emdash-cms/emdash). Runs on any Node.js server with SQLite and local file storage.
+A blog of film reviews, built with [EmDash](https://github.com/emdash-cms/emdash) and hosted on Cloudflare Workers with D1 and R2.
+
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/wwwworldwide/film)
 
 ![Blog template homepage](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/blog/latest/homepage-light-desktop.jpg)
 
@@ -36,12 +38,12 @@ A blog of film reviews, built with [EmDash](https://github.com/emdash-cms/emdash
 
 ## Infrastructure
 
-- **Runtime:** Node.js
-- **Database:** SQLite (local file)
-- **Storage:** Local filesystem
-- **Framework:** Astro with `@astrojs/node`
+- **Runtime:** Cloudflare Workers
+- **Database:** D1
+- **Storage:** R2
+- **Framework:** Astro with `@astrojs/cloudflare`
 
-## Getting Started
+## Local Development
 
 ```bash
 pnpm install
@@ -50,13 +52,17 @@ pnpm dev
 
 Open http://localhost:4321/_emdash/admin and complete the setup wizard. EmDash runs database migrations and applies the blog seed during setup. The site is available at http://localhost:4321.
 
-## Want Cloudflare Instead?
+## Deploying
 
-See the [Cloudflare variant](../blog-cloudflare) for a version that deploys to Cloudflare Workers with D1 and R2.
+```bash
+pnpm wrangler login
+pnpm deploy
+```
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/emdash-cms/templates/tree/main/blog-cloudflare)
+The first deployment provisions the named D1 database and R2 bucket from `wrangler.jsonc`. See [Deploy to Cloudflare](https://docs.emdashcms.com/deployment/cloudflare/) for production setup, or use the deploy button above.
 
 ## See Also
 
+- [Node.js variant](../blog) -- same template using SQLite and local file storage
 - [All templates](../)
 - [EmDash documentation](https://docs.emdashcms.com/)
